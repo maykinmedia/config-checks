@@ -1,5 +1,6 @@
 from collections.abc import Callable, Iterable
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, JsonResponse
 from django.views import View
 
@@ -7,7 +8,8 @@ from ..runner import HealthChecksRunner
 from ..types import HealthCheck
 
 
-class HealthChecksView(View):
+class HealthChecksView(LoginRequiredMixin, View):
+    raise_exception: bool = True
     checks_collector: Callable[[], Iterable[HealthCheck]] | None = None
     checks: Iterable[HealthCheck] | None = None
 
