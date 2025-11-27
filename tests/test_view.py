@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 def test_not_logged_in(client: Client):
-    checks_url = reverse("health-checks-injected-collector")
+    checks_url = reverse("health-checks")
 
     response = client.get(checks_url)
 
@@ -12,24 +12,7 @@ def test_not_logged_in(client: Client):
 
 
 def test_view_injected_collector(client: Client, django_user_model: AbstractUser):
-    checks_url = reverse(
-        "health-checks-injected-collector"
-    )  # Uses injected checks collector.
-    user = django_user_model.objects.create_user(
-        username="johndoe", password="verysecret"
-    )
-    client.force_login(user)
-
-    response = client.get(checks_url)
-
-    assert response.status_code == 200
-    assert response.json() == [
-        {"success": False, "identifier": "dummy_fail", "message": "Everything is sad."}
-    ]
-
-
-def test_view_injected_checks(client: Client, django_user_model: AbstractUser):
-    checks_url = reverse("health-checks-injected-checks")  # Uses injected checks.
+    checks_url = reverse("health-checks")  # Uses injected checks collector.
     user = django_user_model.objects.create_user(
         username="johndoe", password="verysecret"
     )
@@ -44,9 +27,7 @@ def test_view_injected_checks(client: Client, django_user_model: AbstractUser):
 
 
 def test_view_with_success(client: Client, django_user_model: AbstractUser):
-    checks_url = reverse(
-        "health-checks-injected-collector"
-    )  # Uses injected checks collector.
+    checks_url = reverse("health-checks")  # Uses injected checks collector.
     user = django_user_model.objects.create_user(
         username="johndoe", password="verysecret"
     )

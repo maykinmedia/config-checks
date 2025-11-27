@@ -2,10 +2,12 @@ from typing import Protocol
 
 JSONValue = dict[str, "JSONValue"] | list["JSONValue"] | str | int | float | bool | None
 
+type Slug = str
+
 
 class HealthCheckResult[T](Protocol):
     success: bool
-    identifier: str
+    identifier: Slug
     message: str = ""
     extra: T
     """Attribute to include additional info in the health check result."""
@@ -16,6 +18,7 @@ class HealthCheckResult[T](Protocol):
 
 
 class HealthCheck[T](Protocol):
-    identifier: str
+    identifier: Slug
+    "Used as the HealthCheckResult.identifier for uncaught exceptions"
 
     def run(self) -> HealthCheckResult[T]: ...
