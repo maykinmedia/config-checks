@@ -1,8 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.utils.module_loading import import_string
 
-from msgspec import UNSET
-
 from ...runner import HealthChecksRunner
 
 
@@ -43,5 +41,5 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.ERROR(f"Error {result.identifier}: {result.message}")
             )
-            if hasattr(result, "extra") and result.extra != UNSET:
+            if result.extra:
                 self.stdout.write(self.style.ERROR(str(result.extra)))
