@@ -34,13 +34,59 @@ Install
 
 .. code-block:: bash
 
-    pip install maykin_health_checks
+    pip install django-health-checks
+
+Add ``maykin_health_checks`` to the Django ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        ...
+        "maykin_health_checks",
+        ...
+    ]
 
 
 Usage
 =====
 
-<document or refer to docs>
+View
+----
+
+To have an API view that returns the results of the performed health checks,
+add the following to the ``urlpatterns``:
+
+.. code-block:: python
+
+    from django.urls import path
+
+    from maykin_health_checks.api.views import HealthChecksView
+
+    urlpatterns = [
+        ...
+        path(
+            "health-checks",
+            HealthChecksView.as_view(
+                checks_collector=my_checks_collector_fn
+            ),
+            name="health-checks",
+        ),
+    ]
+
+Where ``my_checks_collector_fn`` is a ``Callable[[], Iterable[HealthCheck]]``. It is used to retrieve which health checks should
+be performed by the view. You can also add the view multiple times to the ``urlpatters`` with different ``checks_collector`` arguments 
+if you want to have multiple health check views that run different checks.
+
+Management command
+------------------
+
+There is also a management command that can be used to run health checks from the CLI.
+
+.. code-block:: bash
+
+    django-admin health_checks --checks-collector dotted.path.to.my_checks_collector_fn
+
+    
 
 Local development
 =================
@@ -63,6 +109,17 @@ Then, you can run:
 .. code:: bash
 
     django-admin runserver
+
+Running tests
+=============
+
+To run the tests without tox, you can do the following (from the root of the repository):
+
+.. code:: bash
+
+    export DJANGO_SETTINGS_MODULE=testapp.settings
+    export PYTHONPATH=$PYTHONPATH:`pwd`
+    pytest tests
 
 
 .. |build-status| image:: https://github.com/maykinmedia/django-health-checks/workflows/Run%20CI/badge.svg
