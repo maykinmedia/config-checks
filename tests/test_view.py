@@ -22,7 +22,12 @@ def test_view_injected_collector(client: Client, django_user_model: AbstractUser
 
     assert response.status_code == 200
     assert response.json() == [
-        {"success": False, "identifier": "dummy_fail", "message": "Everything is sad."}
+        {
+            "success": False,
+            "identifier": "dummy_fail",
+            "message": "Everything is sad.",
+            "extra": {"info": "bla"},
+        }
     ]
 
 
@@ -39,6 +44,16 @@ def test_view_with_success(client: Client, django_user_model: AbstractUser):
 
     assert response.status_code == 200
     assert response.json() == [
-        {"success": True, "identifier": "dummy", "message": "Everything is great."},
-        {"success": False, "identifier": "dummy_fail", "message": "Everything is sad."},
+        {
+            "success": True,
+            "identifier": "dummy",
+            "message": "Everything is great.",
+            "extra": None,
+        },
+        {
+            "success": False,
+            "identifier": "dummy_fail",
+            "message": "Everything is sad.",
+            "extra": {"info": "bla"},
+        },
     ]

@@ -9,7 +9,10 @@ def test_management_command():
         "health_checks", checks_collector="testapp.checks.check_collector", stdout=out
     )
 
-    assert "Error dummy_fail: Everything is sad." == out.getvalue().strip("\n")
+    assert (
+        "Error dummy_fail: Everything is sad.\n{'info': 'bla'}"
+        == out.getvalue().strip("\n")
+    )
 
 
 def test_management_command_with_success():
@@ -23,6 +26,6 @@ def test_management_command_with_success():
     )
 
     assert (
-        "Correctly configured: dummy\nError dummy_fail: Everything is sad.\n"
-        == out.getvalue()
+        "Correctly configured: dummy\n"
+        "Error dummy_fail: Everything is sad.\n{'info': 'bla'}\n" == out.getvalue()
     )
