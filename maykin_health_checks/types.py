@@ -8,7 +8,7 @@ type Slug = str
 class HealthCheckResult[T](Protocol):
     success: bool
     identifier: Slug
-    message: str = ""
+    message: str
     extra: T
     """Attribute to include additional info in the health check result."""
 
