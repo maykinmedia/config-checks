@@ -22,7 +22,7 @@ class HealthChecksRunner:
         self,
         *,
         checks_collector: Callable[[], Iterable[HealthCheck]],
-        include_success: bool = False,
+        include_success: bool = True,
     ):
         self._checks_collector = checks_collector
         self._include_success = include_success
