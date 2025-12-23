@@ -1,8 +1,8 @@
-.. maykin_health_checks documentation master file, created by startproject.
+.. maykin_config_checks documentation master file, created by startproject.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to maykin_health_checks's documentation!
+Welcome to maykin_config_checks's documentation!
 =================================================
 
 |build-status| |code-quality| |ruff| |coverage| 
@@ -45,16 +45,16 @@ Indices and tables
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/maykin_health_checks/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/maykin_health_checks
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/maykin_config_checks/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/maykin_config_checks
     :alt: Coverage status
 
-.. |docs| image:: https://readthedocs.org/projects/maykin_health_checks/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/maykin_config_checks/badge/?version=latest
     :alt: Documentation Status
 
-.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin_health_checks.svg
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin_config_checks.svg
 
-.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin_health_checks.svg
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin_config_checks.svg
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin_health_checks.svg
-    :target: https://pypi.org/project/maykin_health_checks/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin_config_checks.svg
+    :target: https://pypi.org/project/maykin_config_checks/

@@ -9,7 +9,7 @@ Install from PyPI with pip:
 
 .. code-block:: bash
 
-    pip install maykin_health_checks
+    pip install maykin_config_checks
 
 
 Usage

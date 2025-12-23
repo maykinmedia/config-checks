@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from maykin_health_checks.api.views import HealthChecksView
+from maykin_config_checks.api.views import HealthChecksView
 from testapp.checks import DummyCheck, DummyCheckFail
 
 urlpatterns = [

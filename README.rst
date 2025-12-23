@@ -4,7 +4,7 @@ Welcome to Maykin Health Checks' documentation!
 ===============================================
 
 :Version: 0.1.0
-:Source: https://github.com/maykinmedia/django-health-checks
+:Source: https://github.com/maykinmedia/config-checks
 :Keywords: ``Django``, ``Maykin``, ``health checks``
 :PythonVersion: 3.12, 3.13
 
@@ -36,13 +36,13 @@ Install
 
     pip install django-health-checks
 
-Add ``maykin_health_checks`` to the Django ``INSTALLED_APPS``:
+Add ``maykin_config_checks`` to the Django ``INSTALLED_APPS``:
 
 .. code-block:: python
 
     INSTALLED_APPS = [
         ...
-        "maykin_health_checks",
+        "maykin_config_checks",
         ...
     ]
 
@@ -60,7 +60,7 @@ add the following to the ``urlpatterns``:
 
     from django.urls import path
 
-    from maykin_health_checks.api.views import HealthChecksView
+    from maykin_config_checks.api.views import HealthChecksView
 
     urlpatterns = [
         ...
@@ -134,16 +134,16 @@ To run the tests without tox, you can do the following (from the root of the rep
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/maykin_health_checks/branch/main/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/maykin_health_checks
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/config-checks/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/config-checks
     :alt: Coverage status
 
-.. |docs| image:: https://readthedocs.org/projects/maykin_health_checks/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/config-checks/badge/?version=latest
     :alt: Documentation Status
 
-.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin_health_checks.svg
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin-config-checks.svg
 
-.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin_health_checks.svg
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin-config-checks.svg
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin_health_checks.svg
-    :target: https://pypi.org/project/maykin_health_checks/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin-config-checks.svg
+    :target: https://pypi.org/project/maykin-config-checks/

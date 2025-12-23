@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from dataclasses import asdict, dataclass
 
-from maykin_health_checks import HealthCheck, HealthCheckResult, JSONValue
+from maykin_config_checks import HealthCheck, HealthCheckResult, JSONValue
 
 
 @dataclass
