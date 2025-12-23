@@ -6,14 +6,12 @@ from .. import HealthCheckResult
 
 register = template.Library()
 
-# TODO: the results don't have a nice human readable identifier.
-# We are not displaying the data in the "extra" field
-
 
 @register.inclusion_tag("configuration_health_check.html")
 def display_health_checks(
     check_results: Iterable[HealthCheckResult],
 ) -> dict[str, Iterable[HealthCheckResult]]:
+    """Display the verbose name and the message of each (failed) result."""
     successful_checks = []
     failed_checks = []
     for check_result in check_results:

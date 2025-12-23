@@ -19,7 +19,8 @@
             </li>
             {% endfor %}
         </ul>
-    {% else %}
+    {% endif %}
+    {% if successful_checks %}
         <p>{% translate 'The following checks ran successfully:' %}</p>
         <ul class="config-success-list">
             {% for successful_check in successful_checks %}
