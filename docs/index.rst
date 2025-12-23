@@ -25,14 +25,6 @@ performed in the Admin or via ``django-setup-configuration`` is correct.
    development
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-
 .. |build-status| image:: https://github.com/maykinmedia/django-health-checks/workflows/Run%20CI/badge.svg
     :alt: Build status
     :target: https://github.com/maykinmedia/django-health-checks/actions?query=workflow%3A%22Run+CI%22
@@ -49,7 +41,7 @@ Indices and tables
     :target: https://codecov.io/gh/maykinmedia/maykin_config_checks
     :alt: Coverage status
 
-.. |docs| image:: https://readthedocs.org/projects/maykin_config_checks/badge/?version=latest
+.. |docs| image:: https://app.readthedocs.org/projects/config-checks/badge/?version=latest
     :alt: Documentation Status
 
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin_config_checks.svg

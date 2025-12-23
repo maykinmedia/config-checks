@@ -1,7 +1,7 @@
 
 
-Welcome to Maykin Health Checks' documentation!
-===============================================
+Welcome to Maykin Configuration Checks' documentation!
+======================================================
 
 :Version: 0.1.0
 :Source: https://github.com/maykinmedia/config-checks
@@ -36,7 +36,7 @@ Install
 
 .. code-block:: bash
 
-    pip install django-health-checks
+    pip install maykin-config-checks
 
 Add ``maykin_config_checks`` to the Django ``INSTALLED_APPS``:
 
@@ -86,7 +86,7 @@ There is also a management command that can be used to run health checks from th
 
 .. code-block:: bash
 
-    django-admin health_checks --checks-collector dotted.path.to.my_checks_collector_fn
+    django-admin config_checks --checks-collector dotted.path.to.my_checks_collector_fn
 
 
 
@@ -140,7 +140,7 @@ To run the tests without tox, you can do the following (from the root of the rep
     :target: https://codecov.io/gh/maykinmedia/config-checks
     :alt: Coverage status
 
-.. |docs| image:: https://readthedocs.org/projects/config-checks/badge/?version=latest
+.. |docs| image:: https://app.readthedocs.org/projects/config-checks/badge/?version=latest
     :alt: Documentation Status
 
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin-config-checks.svg
