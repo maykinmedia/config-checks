@@ -14,14 +14,14 @@ import sys
 from pathlib import Path
 
 current_dir = Path(__file__).parents[1]
-code_directory = current_dir / "maykin_health_checks"
+code_directory = current_dir / "maykin_config_checks"
 
 sys.path.insert(0, str(code_directory))
 
 
 # -- Project information -----------------------------------------------------
 
-project = "maykin_health_checks"
+project = "maykin_config_checks"
 copyright = "2025, Maykin Media"
 author = "Maykin Media"
 

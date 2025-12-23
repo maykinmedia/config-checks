@@ -1,6 +1,6 @@
 from django import template
 
-from maykin_health_checks import run_checks
+from maykin_config_checks import run_checks
 
 from ..checks import DummyCheck, DummyCheckFail
 

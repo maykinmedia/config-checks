@@ -1,4 +1,4 @@
-from maykin_health_checks import ErrorInfo, GenericHealthCheckResult, run_checks
+from maykin_config_checks import ErrorInfo, GenericHealthCheckResult, run_checks
 from testapp.checks import CheckWithException, DummyCheck
 
 

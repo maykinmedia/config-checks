@@ -5,7 +5,7 @@ from ... import run_checks
 
 
 class Command(BaseCommand):
-    help = "Run all health checks"
+    help = "Run application configuration health checks."
 
     def add_arguments(self, parser):
         parser.add_argument(

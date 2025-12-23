@@ -11,7 +11,7 @@ DEBUG = True
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "maykin_health_checks.db",
+        "NAME": BASE_DIR / "maykin_config_checks.db",
     }
 }
 
@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.admin",
     "django.contrib.staticfiles",
-    "maykin_health_checks",
+    "maykin_config_checks",
     "testapp",
 ]
 
