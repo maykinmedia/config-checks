@@ -37,16 +37,16 @@ performed in the Admin or via ``django-setup-configuration`` is correct.
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-.. |coverage| image:: https://codecov.io/gh/maykinmedia/maykin_config_checks/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/maykinmedia/maykin_config_checks
+.. |coverage| image:: https://codecov.io/gh/maykinmedia/config-checks/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/maykinmedia/config-checks
     :alt: Coverage status
 
 .. |docs| image:: https://app.readthedocs.org/projects/config-checks/badge/?version=latest
     :alt: Documentation Status
 
-.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin_config_checks.svg
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/maykin-config-checks.svg
 
-.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin_config_checks.svg
+.. |django-versions| image:: https://img.shields.io/pypi/djversions/maykin-config-checks.svg
 
-.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin_config_checks.svg
-    :target: https://pypi.org/project/maykin_config_checks/
+.. |pypi-version| image:: https://img.shields.io/pypi/v/maykin-config-checks.svg
+    :target: https://pypi.org/project/maykin-config-checks/
