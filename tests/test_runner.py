@@ -1,4 +1,4 @@
-from maykin_config_checks import ErrorInfo, GenericHealthCheckResult, run_checks
+from maykin_config_checks import ErrorInfo, GenericConfigCheckResult, run_checks
 from testapp.checks import CheckWithException, DummyCheck
 
 
@@ -28,7 +28,7 @@ def test_runner_with_unexpected_exception():
 
     result = results[0]
 
-    assert isinstance(result, GenericHealthCheckResult)
+    assert isinstance(result, GenericConfigCheckResult)
     assert not result.success
     assert hasattr(result, "extra") and isinstance(result.extra, ErrorInfo)
     assert "HELLO EXCEPTION" in result.extra.traceback

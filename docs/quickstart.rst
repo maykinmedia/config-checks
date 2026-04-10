@@ -34,11 +34,11 @@ Implementing checks
 
 This library is based on the following components:
 
-* The :class:`HealthCheck` which implements the logic of a particular configuration check.
-* The :class:`HealthCheckResult`, which is the result of running a :class:`HealthCheck`. 
+* The :class:`ConfigCheck` which implements the logic of a particular configuration check.
+* The :class:`ConfigCheckResult`, which is the result of running a :class:`ConfigCheck`.
   It contains information about whether the check succeeded and additional information in case the check failed.
-* The :func:`run_checks`, which runs all the :class:`HealthCheck` that are retrieved by a collector 
-  function and returns an iterable of :class:`HealthCheckResult`.
+* The :func:`run_checks`, which runs all the :class:`ConfigCheck` that are retrieved by a collector
+  function and returns an iterable of :class:`ConfigCheckResult`.
 
 You can see dummy implementations of all of these components below:
 
@@ -48,23 +48,23 @@ You can see dummy implementations of all of these components below:
 View
 ----
 
-To have an API view that returns the results of the performed health checks,
+To have an API view that returns the results of the performed config checks,
 add the following to the ``urlpatterns``:
 
 .. literalinclude:: ../testapp/urls.py
     :language: python
 
-Where the argument ``checks_collector`` is a ``Callable[[], Iterable[HealthCheck]]``. It is used to retrieve which health checks should
+Where the argument ``checks_collector`` is a ``Callable[[], Iterable[ConfigCheck]]``. It is used to retrieve which config checks should
 be performed by the view. You can also add the view multiple times to the ``urlpatters`` with different ``checks_collector`` arguments 
-if you want to have multiple health check views that run different checks.
+if you want to have multiple config check views that run different checks.
 
 Management command
 ------------------
 
-There is also a management command that can be used to run health checks from the CLI.
+There is also a management command that can be used to run config checks from the CLI.
 
 .. code-block:: bash
 
-    django-admin health_checks --checks-collector dotted.path.to.checks_collector_fn
+    django-admin config_checks --checks-collector dotted.path.to.checks_collector_fn
 
 

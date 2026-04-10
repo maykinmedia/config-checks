@@ -5,7 +5,7 @@ from ... import run_checks
 
 
 class Command(BaseCommand):
-    help = "Run application configuration health checks."
+    help = "Run application configuration checks."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -19,7 +19,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "--include-success",
             action="store_true",
-            help="Whether to also show health checks that succeeded.",
+            help="Whether to also show config checks that succeeded.",
             default=False,
         )
         parser.add_argument(

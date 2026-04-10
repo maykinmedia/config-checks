@@ -2,15 +2,15 @@ from collections.abc import Iterable
 
 from django import template
 
-from .. import HealthCheckResult
+from .. import ConfigCheckResult
 
 register = template.Library()
 
 
-@register.inclusion_tag("configuration_health_check.html")
-def display_health_checks(
-    check_results: Iterable[HealthCheckResult],
-) -> dict[str, Iterable[HealthCheckResult]]:
+@register.inclusion_tag("configuration_config_check.html")
+def display_config_checks(
+    check_results: Iterable[ConfigCheckResult],
+) -> dict[str, Iterable[ConfigCheckResult]]:
     """Display the verbose name and the message of each (failed) result."""
     successful_checks = []
     failed_checks = []

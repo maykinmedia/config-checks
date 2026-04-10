@@ -5,14 +5,14 @@ Welcome to Maykin Configuration Checks' documentation!
 
 :Version: 0.1.0
 :Source: https://github.com/maykinmedia/config-checks
-:Keywords: ``Django``, ``Maykin``, ``configuration``, ``health checks``
+:Keywords: ``Django``, ``Maykin``, ``configuration``, ``config checks``
 :PythonVersion: 3.12, 3.13
 
 |build-status| |code-quality| |ruff| |coverage| 
 
 |python-versions| |django-versions| |pypi-version|
 
-This library aims to standardise how health checks for Maykin Django applications 
+This library aims to standardise how config checks for Maykin Django applications
 are run. The checks are meant to validate that the configuration that is normally
 performed in the Admin or via ``django-setup-configuration`` is correct.
 
