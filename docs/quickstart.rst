@@ -86,6 +86,7 @@ Interactive checks are executed manually from the Django admin and can collect i
 parameters from the user through a check-specific form. The library handles all the
 boilerplate: exposing URLs, admin integration, permission enforcement, form validation,
 and reporting results back to the user.
+
 Many checks cannot be defined statically — they depend on runtime context provided by
 the administrator. For example, verifying that a case management system (zaaksysteem) is
 correctly configured often requires more than a connectivity check: you may also need to
@@ -97,12 +98,19 @@ an API key that is valid but lacks the permissions needed to access a particular
 or a filter that returns no results for the test subject chosen. Because both sides of the
 integration affect the outcome, you need a fast feedback loop: run a check, adjust the
 configuration, and run it again without leaving the admin.
+
 Typical use cases include:
-* verifying connectivity with an external API and confirming the credentials have the required permissions (not just that the endpoint is reachable)
-* fetching real records from a backend service for a given subject — e.g. retrieving cases for a specific BSN to confirm the full request/response cycle works end-to-end
-* validating the configuration of a specific object, such as an API group, to catch misconfigured fields that only surface when used together
-* checking that a notification or webhook destination accepts a test event and acknowledges it correctly
-* confirming that a search index or filter returns expected results for a known input, catching issues with permissions, scoping, or data availability
+
+* verifying connectivity with an external API and confirming the credentials have the
+  required permissions (not just that the endpoint is reachable)
+* fetching real records from a backend service for a given subject — e.g. retrieving
+  cases for a specific BSN to confirm the full request/response cycle works end-to-end
+* validating the configuration of a specific object, such as an API group, to catch
+  misconfigured fields that only surface when used together
+* checking that a notification or webhook destination accepts a test event and
+  acknowledges it correctly
+* confirming that a search index or filter returns expected results for a known input,
+  catching issues with permissions, scoping, or data availability
 
 
 Defining an interactive check
@@ -132,7 +140,7 @@ Example:
         identifier = "fetch_cases"
         label = "Fetch cases for BSN"
         form_class = FetchCasesParams
-
+        required_permissions = [IsStaffUser(), HasModelRead()]
 
         @classmethod
         def get_form_kwargs(cls, obj=None):
@@ -198,58 +206,63 @@ Example:
 Permissions
 -----------
 
-Interactive checks may define permission requirements using
-``required_permissions``.
+The ``required_permissions`` attribute accepts a list of permission class instances.
+All permissions in the list must pass for the check to be accessible. If the attribute
+is omitted, the default behaviour requires the user to be an active staff member.
 
-If no permissions are defined, the default permission requires the user
-to be an active staff member.
+Each permission class implements the :class:`BasePermission` interface:
 
-This attribute should contain a list of permission classes. Each
-permission class must implement the :class:`BasePermission` interface
-and define two methods:
+* ``has_permission(request, obj)`` – returns ``True`` if the user may run the check.
+* ``get_error_message(obj)`` – returns the message shown when permission is denied.
 
-* ``has_permission(request, obj)`` – returns ``True`` if the user is allowed
-  to execute the check.
-* ``get_error_message(obj)`` – returns the error message shown when
-  permission is denied.
+.. note::
 
-If no permissions are specified, the default behaviour requires the user
-to be an active staff member.
+   ``obj`` is the model instance the check is invoked from, but it may be ``None``
+   when the check is executed in standalone mode (i.e. not from a specific admin
+   object). Permission classes must handle this case explicitly.
 
 Available permission classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The library provides several built-in permission classes:
+``IsStaffUser``
+  Passes if the user is an active Django staff member (``is_active`` and
+  ``is_staff``). This is the implicit default when no permissions are defined.
 
-* ``IsActiveAdminUser`` – allows execution only for active Django admin users
-  (``is_active`` and ``is_staff``).
+``IsSuperUser``
+  Passes only for superusers. Use this to restrict sensitive checks that should
+  never be delegated.
 
-* ``HasModelRead`` – requires the user to have **view permission** for the
-  relevant Django model.
+``HasPermission(perm)``
+  Passes if the user has the named Django permission, e.g.
+  ``HasPermission("myapp.view_apicredentials")``. The permission string follows
+  the standard ``"<app_label>.<codename>"`` format.
 
-* ``HasModelWrite`` – requires the user to have **change permission** for the
-  relevant Django model.
+``HasModelRead(model=None)``
+  Passes if the user has the **view** permission for the given model. When ``obj``
+  is available the model is inferred from it automatically; pass ``model`` explicitly
+  when the check may run in standalone mode and ``obj`` could be ``None``.
 
-These permission classes are based on the generic ``HasModelPermission``
-class, which checks Django model permissions using the standard
-permission system.
+``HasModelWrite(model=None)``
+  Passes if the user has the **change** permission for the given model. Same
+  ``obj``/``model`` rules apply as for ``HasModelRead``.
 
 Example
 ~~~~~~~
 
-The example below restricts execution of the check to users who have
-change permissions for the associated model.
-
 .. code-block:: python
 
-    from open_inwoner.config_checks.permissions import HasModelWrite
+    from maykin_config_checks.permissions import IsSuperUser, HasPermission, HasModelWrite
 
 
     class FetchCasesCheck:
         identifier = "fetch_cases"
         label = "Fetch cases for BSN"
         form_class = FetchCasesParams
-        required_permissions = [HasModelWrite()]
+        required_permissions = [
+            IsSuperUser(),
+            HasPermission("myzgwapp.run_diagnostics"),
+            HasModelWrite(model=ZGWApiGroup),  # explicit model in case obj is None
+        ]
 
 
 Exposing checks in the admin
