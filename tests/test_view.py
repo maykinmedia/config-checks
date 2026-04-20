@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 def test_not_logged_in(client: Client):
-    checks_url = reverse("health-checks")
+    checks_url = reverse("config-checks")
 
     response = client.get(checks_url)
 
@@ -12,7 +12,7 @@ def test_not_logged_in(client: Client):
 
 
 def test_view_injected_collector(client: Client, django_user_model: AbstractUser):
-    checks_url = reverse("health-checks")  # Uses injected checks collector.
+    checks_url = reverse("config-checks")  # Uses injected checks collector.
     user = django_user_model.objects.create_user(
         username="johndoe", password="verysecret"
     )
@@ -33,7 +33,7 @@ def test_view_injected_collector(client: Client, django_user_model: AbstractUser
 
 
 def test_view_with_success(client: Client, django_user_model: AbstractUser):
-    checks_url = reverse("health-checks")  # Uses injected checks collector.
+    checks_url = reverse("config-checks")  # Uses injected checks collector.
     user = django_user_model.objects.create_user(
         username="johndoe", password="verysecret"
     )

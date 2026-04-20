@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from dataclasses import asdict, dataclass
 
-from maykin_config_checks import HealthCheck, HealthCheckResult, JSONValue
+from maykin_config_checks import ConfigCheck, ConfigCheckResult, JSONValue
 
 
 @dataclass
@@ -20,7 +20,7 @@ class DummyCheck:
     identifier = "dummy"
     verbose_name = "Dummy"
 
-    def __call__(self) -> HealthCheckResult:
+    def __call__(self) -> ConfigCheckResult:
         return DummyResult(
             success=True,
             verbose_name=self.verbose_name,
@@ -33,7 +33,7 @@ class DummyCheckFail:
     identifier = "dummy_fail"
     verbose_name = "Dummy fail"
 
-    def __call__(self) -> HealthCheckResult:
+    def __call__(self) -> ConfigCheckResult:
         return DummyResult(
             success=False,
             verbose_name=self.verbose_name,
@@ -47,9 +47,9 @@ class CheckWithException:
     identifier = "check_with_exception"
     verbose_name = "Check with exception"
 
-    def __call__(self) -> HealthCheckResult:
+    def __call__(self) -> ConfigCheckResult:
         raise Exception("HELLO EXCEPTION!")
 
 
-def check_collector() -> Iterable[HealthCheck]:
+def check_collector() -> Iterable[ConfigCheck]:
     return [DummyCheck(), DummyCheckFail()]

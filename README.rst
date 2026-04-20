@@ -5,14 +5,14 @@ Welcome to Maykin Configuration Checks' documentation!
 
 :Version: 0.1.0
 :Source: https://github.com/maykinmedia/config-checks
-:Keywords: ``Django``, ``Maykin``, ``health checks``
+:Keywords: ``Django``, ``Maykin``, ``config checks``
 :PythonVersion: 3.12, 3.13
 
 |build-status| |code-quality| |ruff| |coverage| |docs|
 
 |python-versions| |django-versions| |pypi-version|
 
-This library aims to standardise how health checks for Maykin Django applications 
+This library aims to standardise how config checks for Maykin Django applications
 are run. The checks are meant to validate that the configuration that is normally
 performed in the Admin or via ``django-setup-configuration`` is correct.
 
@@ -55,34 +55,34 @@ Usage
 View
 ----
 
-To have an API view that returns the results of the performed health checks,
+To have an API view that returns the results of the performed config checks,
 add the following to the ``urlpatterns``:
 
 .. code-block:: python
 
     from django.urls import path
 
-    from maykin_config_checks.api.views import HealthChecksView
+    from maykin_config_checks.api.views import ConfigChecksView
 
     urlpatterns = [
         ...
         path(
-            "health-checks",
-            HealthChecksView.as_view(
+            "config-checks",
+            ConfigChecksView.as_view(
                 checks_collector=my_checks_collector_fn
             ),
-            name="health-checks",
+            name="config-checks",
         ),
     ]
 
-Where ``my_checks_collector_fn`` is a ``Callable[[], Iterable[HealthCheck]]``. It is used to retrieve which health checks should
+Where ``my_checks_collector_fn`` is a ``Callable[[], Iterable[ConfigCheck]]``. It is used to retrieve which config checks should
 be performed by the view. You can also add the view multiple times to the ``urlpatters`` with different ``checks_collector`` arguments 
-if you want to have multiple health check views that run different checks.
+if you want to have multiple config check views that run different checks.
 
 Management command
 ------------------
 
-There is also a management command that can be used to run health checks from the CLI.
+There is also a management command that can be used to run config checks from the CLI.
 
 .. code-block:: bash
 

@@ -10,28 +10,28 @@ JSONValue = dict[str, "JSONValue"] | list["JSONValue"] | str | int | float | boo
 type Slug = str
 
 
-class HealthCheckResult[T](Protocol):
+class ConfigCheckResult[T](Protocol):
     success: bool
     identifier: Slug
-    """Identify from which health check this result comes from."""
+    """Identify from which config check this result comes from."""
     verbose_name: str
     message: str
     extra: T
-    """Include additional information in the health check result."""
+    """Include additional information in the config check result."""
 
     def to_builtins(self) -> JSONValue:
         """Return a serialisable object."""
         ...
 
 
-class HealthCheck[T](Protocol):
+class ConfigCheck[T](Protocol):
     identifier: Slug
     verbose_name: str
 
-    def __call__(self) -> HealthCheckResult[T]: ...
+    def __call__(self) -> ConfigCheckResult[T]: ...
 
 
-type HealthCheckCollector = Callable[[], Iterable[HealthCheck]]
+type ConfigCheckCollector = Callable[[], Iterable[ConfigCheck]]
 
 
 @dataclass
@@ -40,7 +40,7 @@ class ErrorInfo:
 
 
 @dataclass
-class GenericHealthCheckResult:
+class GenericConfigCheckResult:
     success: bool
     identifier: Slug
     verbose_name: str
@@ -52,14 +52,14 @@ class GenericHealthCheckResult:
 
 
 def run_checks(
-    checks_collector: HealthCheckCollector, include_success: bool
-) -> Iterable[HealthCheckResult]:
+    checks_collector: ConfigCheckCollector, include_success: bool
+) -> Iterable[ConfigCheckResult]:
     results = []
     for check in checks_collector():
         try:
             result = check()
         except Exception:
-            result = GenericHealthCheckResult(
+            result = GenericConfigCheckResult(
                 identifier=check.identifier,
                 verbose_name=check.verbose_name,
                 success=False,

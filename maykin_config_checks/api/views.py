@@ -4,14 +4,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, JsonResponse
 from django.views import View
 
-from .. import HealthCheck, run_checks
+from .. import ConfigCheck, run_checks
 
 
-class HealthChecksView(LoginRequiredMixin, View):
+class ConfigChecksView(LoginRequiredMixin, View):
     raise_exception: bool = True
-    checks_collector: Callable[[], Iterable[HealthCheck]] = lambda: []
+    checks_collector: Callable[[], Iterable[ConfigCheck]] = lambda: []
     """
-    The method to gather the HealthChecks that the view will run.
+    The method to gather the ConfigChecks that the view will run.
 
     Specify this as an initkwargs in the ``as_view(checks_collector=...)`` class method.
     """
