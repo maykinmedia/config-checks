@@ -48,7 +48,7 @@ class CheckWithException:
     verbose_name = "Check with exception"
 
     def __call__(self) -> ConfigCheckResult:
-        raise Exception("HELLO EXCEPTION!")
+        raise Exception("HELLO EXCEPTION!")  # noqa
 
 
 def check_collector() -> Iterable[ConfigCheck]:

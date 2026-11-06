@@ -58,7 +58,7 @@ def run_checks(
     for check in checks_collector():
         try:
             result = check()
-        except Exception:
+        except Exception:  # noqa
             result = GenericConfigCheckResult(
                 identifier=check.identifier,
                 verbose_name=check.verbose_name,
