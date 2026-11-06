@@ -9,7 +9,7 @@ from .. import ConfigCheck, run_checks
 
 class ConfigChecksView(LoginRequiredMixin, View):
     raise_exception: bool = True
-    checks_collector: Callable[[], Iterable[ConfigCheck]] = lambda: []
+    checks_collector: Callable[[], Iterable[ConfigCheck]] = list
     """
     The method to gather the ConfigChecks that the view will run.
 
